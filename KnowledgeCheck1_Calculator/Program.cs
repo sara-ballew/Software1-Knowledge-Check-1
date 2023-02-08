@@ -13,6 +13,22 @@ namespace KnowledgeCheck1_Calculator
 
             Console.WriteLine("Hello. Press 1 for addition, 2 for subtraction, 3 for multiplication, and 4 for division");
 
+            string[] GetTwoInts()
+            {
+                string[] UserInput = new string[2];
+                UserInput[0] = Console.ReadLine();
+                UserInput[1] = Console.ReadLine();
+
+
+                return UserInput;
+            }
+            //This didn't really simplify the code or make it less redundant, but I tried. ugh.
+
+            void InvalidInput()
+            {
+                Console.WriteLine("One or more of these numbers is not an integer");
+            }
+
             var input = Console.ReadLine();
             var calculator = new Calculator();
 
@@ -20,38 +36,50 @@ namespace KnowledgeCheck1_Calculator
             {
                 case "1":
                     Console.WriteLine("Enter 2 integers to add");
-                    var addNumber1 = Console.ReadLine();
-                    var addNumber2 = Console.ReadLine();
+                    var addNumbers = GetTwoInts();
 
-                    if (int.TryParse(addNumber1, out int addNumOne) && int.TryParse(addNumber2, out int addNumTwo))
+                    if (int.TryParse(addNumbers[0], out int addNumOne) &&
+                        int.TryParse(addNumbers[1], out int addNumTwo))
                     {
-                        Console.Write($"{addNumber1} + {addNumber2} = ");
+                        Console.Write($"{addNumbers[0]} + {addNumbers[1]} = ");
                         Console.Write(calculator.Add(addNumOne, addNumTwo));
                     }
                     else
                     {
-                        Console.WriteLine("One or more of the numbers is not an int");
+                        InvalidInput();
                     }
                     break;
 
                 case "2":
                     Console.WriteLine("Enter 2 integers to subtract");
-                    var subtractNumber1 = Console.ReadLine();
-                    var subtractNumber2 = Console.ReadLine();
+                    var subNumbers = GetTwoInts();
 
-                    if (int.TryParse(subtractNumber1, out int subNumOne) && int.TryParse(subtractNumber2, out int subNumTwo))
+                    if (int.TryParse(subNumbers[0], out int subNumOne) &&
+                        int.TryParse(subNumbers[1], out int subNumTwo))
                     {
-                        Console.Write($"{subtractNumber1} - {subtractNumber2} = ");
+                        Console.Write($"{subNumbers[0]} - {subNumbers[1]} = ");
                         Console.Write(calculator.Subtract(subNumOne, subNumTwo));
                     }
                     else
                     {
-                        Console.WriteLine("One or more of the numbers is not an int");
+                        InvalidInput();
                     }
                     break;
 
                 case "3":
-                    // Add code here
+                    Console.WriteLine("Enter 2 integers to multiply");
+                    var multNumbers = GetTwoInts();
+
+                    if (int.TryParse(multNumbers[0], out int multNumOne) &&
+                        int.TryParse(multNumbers[1], out int multNumTwo))
+                    {
+                        Console.Write($"{multNumbers[0]} * {multNumbers[1]} = ");
+                        Console.Write(calculator.Multiply(multNumOne, multNumTwo));
+                    }
+                    else
+                    {
+                        InvalidInput();
+                    }
                     break;
 
                 case "4":
@@ -66,9 +94,8 @@ namespace KnowledgeCheck1_Calculator
                     }
                     else
                     {
-                        Console.WriteLine("One or more of the numbers is not an int");
+                        InvalidInput();
                     }
-                    break;
                     break;
 
                 default:
